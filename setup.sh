@@ -135,12 +135,6 @@ function install() {
     gdrive download $WALLPAPERID
   done
   cd ~
-
-  echo "[INFO]OCTAVE INSTALL"
-  brew install gnuplot --with-aquaterm --with-x11 &&\
-  brew install octave
-
-  echo "[END]NORMALLY END!!"
 }
 
 if [ $# -eq 0 ]; then
