@@ -1,60 +1,73 @@
-########################################
 # 環境変数
-
+## PATH
 export LANG=ja_JP.UTF-8
-export GOPATH=$HOME/dev
 export MANPATH=/usr/local/opt/inetutils/libexec/gnuman:$MANPATH
-export PATH=/usr/local/bin:/usr/local/opt/inetutils/libexec/gnubin:$GOPATH/bin:$PATH
-export PATH=/usr/local/octave/3.8.0/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/opt/inetutils/libexec/gnubin:/bin:/usr/local/octave/3.8.0/bin:$PATH
 
-#エディタをvimに設定
-export EDITORP=vim
+## Editor
+export EDITOR=vim
 
-#######################################
-# 外部プラグイン
-# zplug
+# 外部プラグイン(zplug)
+## global setting
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-# 構文のハイライト(https://github.com/zsh-users/zsh-syntax-highlighting)
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, as:plugin
-# タイプ補完
+# zsh のコマンドラインに色付けをするやつ
+## https://github.com/zsh-users/zsh-syntax-highlighting
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, ap:plugin
+
+# 補完ファイル(vagrant,docker,jqなど)
+## https://github.com/zsh-users/zsh-completions
+zplug "zsh-users/zsh-completions", as:plugin
+
+# 履歴からのコマンド補完
+## https://github.com/zsh-users/zsh-autosuggestions
 zplug "zsh-users/zsh-autosuggestions", as:plugin
-zplug "zsh-users/zsh-completions", use:'src/_*', lazy:true, as:plugin
+
+# docker コマンドの補完
+## none
+zplug "docker/cli", use:"contrib/completion/zsh/_docker", lazy:true
+
+# kubectl コマンドの補完
+## https://github.com/nnao45/zsh-kubectl-completion
+zplug "nnao45/zsh-kubectl-completion", lazy:true
+zstyle ':completion:*:*:kubectl:*' list-grouped false
+
+# 256色の表示
+## https://github.com/chrissicool/zsh-256color
 zplug "chrissicool/zsh-256color", as:plugin
 
-# simple trash tool that works on CLI, written in Go(https://github.com/b4b4r07/gomi)
-zplug "b4b4r07/gomi", as:command, from:gh-r, as:plugin
-
-# 略語を展開する
+# aliasを展開する
+## https://github.com/momo-lab/zsh-abbrev-alias
 zplug "momo-lab/zsh-abbrev-alias", as:plugin
 
-# dockerコマンドの補完
-zplug "felixr/docker-zsh-completion", as:plugin
-
-# Tracks your most used directories, based on 'frecency'.
+# 頻繁に使用するディレクトリを検索し表示する
+## https://github.com/rupa/z
 zplug "rupa/z", use:"*.sh", as:plugin
 
-# Install plugins if there are plugins that have not been installed
+# zplug プラグインインストールチェック
 if ! zplug check --verbose; then
   printf "Install? [y/N]: "
   if read -q; then
     echo; zplug install
   fi
 fi
-# Then, source plugins and add commands to $PATH
 zplug load
+
+# History
+## [note]
+## HISTFILE:コマンド履歴フォルダ
+## HISTSIZE:メモリに保存される履歴件数。
+## SAVEHIST:HISTFILE で指定したファイルに保存される履歴の件数。
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=1000
+export SAVEHIST=100000
 
 #######################################
 # プロンプトなどの設定
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
-
-# ヒストリの設定
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
 
 # プロンプト
 
