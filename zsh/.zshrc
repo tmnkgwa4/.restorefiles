@@ -14,7 +14,7 @@ source $ZPLUG_HOME/init.zsh
 
 # zsh のコマンドラインに色付けをするやつ
 ## https://github.com/zsh-users/zsh-syntax-highlighting
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, ap:plugin
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, as:plugin
 
 # 補完ファイル(vagrant,docker,jqなど)
 ## https://github.com/zsh-users/zsh-completions
@@ -104,13 +104,9 @@ precmd() {
 
 if [ "$(uname)" = 'Darwin' ]; then
   PROMPT=$'%(?.😀 .😱 )%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%} '
-else
-  PROMPT=$'%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%} '
-fi
-
-if [ "$(uname)" = 'Darwin' ]; then
   RPROMPT=$'%{\e[38;5;001m%}%(?..✘☝)%{\e[0m%} %{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
 else
+  PROMPT=$'%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%} '
   RPROMPT=$'%{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
 fi
 
