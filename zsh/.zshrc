@@ -14,7 +14,7 @@ source $ZPLUG_HOME/init.zsh
 
 # zsh のコマンドラインに色付けをするやつ
 ## https://github.com/zsh-users/zsh-syntax-highlighting
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, ap:plugin
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, as:plugin
 
 # 補完ファイル(vagrant,docker,jqなど)
 ## https://github.com/zsh-users/zsh-completions
