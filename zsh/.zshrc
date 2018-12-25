@@ -343,7 +343,7 @@ abbrev-alias la='ls -la'
 abbrev-alias ll='ls -l'
 
 # bat
-abbrev-alias bat='bat --paging never'
+alias bat='bat --paging never'
 
 # rm
 abbrev-alias rm='rm -i'
