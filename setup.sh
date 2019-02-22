@@ -116,8 +116,19 @@ function install() {
     cd ~
 
   echo "[INFO]POWERLINE-GO DOWNLOAD"
-  curl https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64 -o /usr/local/bin/powerline-go && \
-    chmod +x /usr/local/bin/powerline-go
+  cd /usr/local/bin
+  if [ "$(uname)" == 'Darwin' ]; then
+    wget https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-darwin-amd64
+    mv powerline-go-darwin-amd64 powerline-go
+  elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+    wget https://github.com/justjanne/powerline-go/releases/download/v1.11.0/powerline-go-linux-amd64
+    mv powerline-go-linux-amd64 powerline-go
+  else
+    echo "Your platform ($(uname -a)) is not supported."
+    exit 1
+  fi
+  chmod +x /usr/local/bin/powerline-go
+  cd ~
 
   echo "[INFO].SSH DOWNLOAD"
   SSHID="$(gdrive list --query 'fullText contains ".ssh" and trashed = false' | grep dir | awk '{print $1}')"
