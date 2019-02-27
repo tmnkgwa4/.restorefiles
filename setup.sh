@@ -3,7 +3,13 @@
 function main() {
   case "$1" in
     "install")
-      plistchange
+      if [ "$(uname)" == 'Darwin' ]; then
+        plistchange
+      elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+      else
+        echo "Your platform ($(uname -a)) is not supported."
+        exit 1
+      fi
       install
       ;;
     "clean")
