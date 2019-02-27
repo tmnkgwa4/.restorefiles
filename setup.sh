@@ -120,7 +120,7 @@ function install() {
 
     echo "[INFO]APP INSTALL"
       cd ~
-      yum install -y ncurses-devel
+      yum install -y ncurses-devel wget
       yum groupinstall -y "Development"
       cd /usr/local/src
       wget https://sourceforge.net/projects/zsh/files/zsh/5.7.1/zsh-5.7.1.tar.xz/download -O zsh-5.7.1.tar.xz && \
