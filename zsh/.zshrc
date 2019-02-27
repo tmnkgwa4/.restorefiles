@@ -378,6 +378,10 @@ esac
 # kubectl
 alias k='kubectl'
 
+# vi
+alias vi='vim'
+alias view='vim -R'
+
 ########################################
 # tmuxの設定
 # 自動ロギング
