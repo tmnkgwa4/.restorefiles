@@ -130,7 +130,9 @@ function install() {
         make && make install
       echo /usr/local/bin/zsh >> /etc/shells && \
         chsh -s /usr/local/bin/zsh
-      curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | bash
+      curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | /usr/local/zsh
+      cd /usr/local/src && git clone https://github.com/vim/vim.git && cd vim/src && make && make install
+      cd ~
 
     echo "[INFO]COLORSCHEME DOWNLOAD"
     mkdir -p ~/.vim/color && \
