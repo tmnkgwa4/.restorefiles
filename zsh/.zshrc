@@ -400,6 +400,9 @@ fi
 case ${OSTYPE} in
     darwin*)
       ;;
+      abbrev-alias tf='terraform'
+      TERRAFORM_SA_DEST=~/.gcp/terraform-service-account.json
+      export GOOGLE_APPLICATION_CREDENTIALS=$TERRAFORM_SA_DEST
     linux*)
       # terraform
       abbrev-alias tf='terraform'
