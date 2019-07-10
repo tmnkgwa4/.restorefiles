@@ -380,8 +380,14 @@ alias k='kubectl'
 alias ka='kubectl apply'
 alias kd='kubectl delete'
 
+# vi
+alias vi='vim'
+alias view='vim -R'
+
+# kubeconfig
 alias kcr='export KUBECONFIG="$HOME/.kube-raspi/config"'
 alias kcg='export KUBECONFIG="$HOME/.kube-gke/config"'
+
 
 ########################################
 # tmuxの設定
