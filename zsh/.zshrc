@@ -384,6 +384,11 @@ alias kd='kubectl delete'
 alias vi='vim'
 alias view='vim -R'
 
+# kubeconfig
+alias kcr='export KUBECONFIG="$HOME/.kube-raspi/config"'
+alias kcg='export KUBECONFIG="$HOME/.kube-gke/config"'
+
+
 ########################################
 # tmuxの設定
 # 自動ロギング
@@ -419,3 +424,4 @@ case ${OSTYPE} in
 esac
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
