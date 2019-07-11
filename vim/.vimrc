@@ -127,6 +127,8 @@ NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'tacahiroy/ctrlp-funky'
 " CtrlPの拡張プラグイン. コマンド履歴検索
 NeoBundle 'suy/vim-ctrlp-commandline'
+" hilight for yaml
+NeoBundle 'chase/vim-ansible-yaml'
 
 "----------------------------------------------------------
 " CtrlPの設定
