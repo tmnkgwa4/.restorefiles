@@ -83,6 +83,7 @@ py2cairo
 pyenv-virtualenv
 python-yq
 python@3.7
+reattach-to-user-namespace
 robscott/tap/kube-capacity
 romkatv/powerlevel10k/powerlevel10k
 saml2aws
