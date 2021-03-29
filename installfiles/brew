@@ -2,7 +2,7 @@ act
 ansible-lint
 anyenv
 argocd
-automake
+asdf
 avrdude
 awscli
 aylei/tap/kubectl-debug
@@ -14,8 +14,8 @@ circleci
 cjbassi/ytop/ytop
 cmake
 colordiff
-coreutils
 ctop
+curl
 dfu-programmer
 dfu-util
 dive
@@ -36,6 +36,7 @@ gnu-getopt
 gnu-sed
 gnupg
 golangci/tap/golangci-lint
+goldeneggg/tap/lsec2
 gomplate
 goreleaser
 graphviz
@@ -82,8 +83,10 @@ py2cairo
 pyenv-virtualenv
 python-yq
 python@3.7
+reattach-to-user-namespace
 robscott/tap/kube-capacity
 romkatv/powerlevel10k/powerlevel10k
+saml2aws
 shellcheck
 skaffold
 starship
@@ -103,6 +106,7 @@ tree
 tree-sitter
 util-linux
 vault
+vim
 watch
 weaveworks/tap/eksctl
 wget

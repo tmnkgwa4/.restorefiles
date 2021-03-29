@@ -12,3 +12,7 @@
 : 'load zprof' && {
   zmodload zsh/zprof
 }
+
+: 'configuration for nevim' && {
+  export XDG_CONFIG_HOME=$HOME/.config
+}

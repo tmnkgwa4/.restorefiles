@@ -37,7 +37,6 @@
 
 : 'env vars for man' && {
   export MANPATH=/usr/local/opt/inetutils/libexec/gnuman:${MANPATH}
-  source $HOME/.asdf/asdf.sh
 }
 
 : 'env compilation' && {
@@ -52,5 +51,10 @@
   export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
   export PATH="$(go env GOPATH)/bin:${PATH}"
   export PATH=/usr/local/opt/gnu-getopt/bin:${PATH}
+  export PATH=$PATH:~/.bin
 }
 
+: 'env for asdf' && {
+  source $(brew --prefix asdf)/asdf.sh
+  legacy_version_file=yes
+}

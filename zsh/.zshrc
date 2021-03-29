@@ -9,6 +9,7 @@
 
 : "Load myfunction files." && {
   source $HOME/.zsh.d/utils.zsh
+  load_dev
 }
 
 : "Load zinit files" && {
@@ -33,6 +34,10 @@
 
 : "Load alias files." && {
   source $HOME/.zsh.d/alias.zsh
+}
+
+: "Load keybind files." && {
+  source $HOME/.zsh.d/keybind.zsh
 }
 
 : "Output infomation of zsh startup time" && {

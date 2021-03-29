@@ -108,3 +108,7 @@
    ln -s $DOTPATH/tmux/.tmux/$FILENAME ~/.tmux/$FILENAME
   done
 }
+
+: 'install vim' && {
+  ln -s $DOTPATH/vim/.vimrc ~/.vimrc
+}
