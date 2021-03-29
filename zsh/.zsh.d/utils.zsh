@@ -111,6 +111,6 @@ function login_clusterops() {
 function load_dev() {
   if is_osx; then
     source $(brew --prefix asdf)/asdf.sh
-    D
+    asdf reshim golang
   fi
 }
