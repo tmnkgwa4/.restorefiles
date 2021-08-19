@@ -33,4 +33,5 @@
 
   # Powerlevel10k
   zinit ice depth=1; zinit light romkatv/powerlevel10k
+  zinit load mollifier/anyframe
 }

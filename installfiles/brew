@@ -11,6 +11,7 @@ binutils
 bmon
 budougumi0617/lsas/lsas
 cfssl
+chart-testing
 circleci
 cjbassi/ytop/ytop
 cmake
@@ -40,7 +41,6 @@ golangci/tap/golangci-lint
 goldeneggg/tap/lsec2
 gomplate
 goreleaser
-graphviz
 grep
 gsar
 hadolint
@@ -62,12 +62,14 @@ jesseduffield/lazygit/lazygit
 jid
 jp
 k9s
+kind
 kubectx
 kustomize
 ladicle/kubectl-bindrole/kubectl-rolesum
 libglade
 libmagic
 libmpc
+libpq
 lsd
 luajit
 luarocks
@@ -83,6 +85,8 @@ peco
 perl
 pinentry-mac
 pipes-sh
+plantuml
+postgresql
 procs
 protobuf
 py2cairo
@@ -102,7 +106,7 @@ starship
 stern
 tcpdump
 telnet
-terraform-docs
+terraform-docs/tap/terraform-docs
 terraformer
 terraforming
 tfenv

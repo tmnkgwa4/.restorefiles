@@ -18,6 +18,7 @@ mackerelio/mackerel-agent
 qmk/qmk
 robscott/tap
 romkatv/powerlevel10k
+terraform-docs/tap
 tkengo/highway
 versent/taps
 weaveworks/tap
