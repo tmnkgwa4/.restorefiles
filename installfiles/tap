@@ -11,11 +11,14 @@ homebrew/cask
 homebrew/cask-fonts
 homebrew/core
 jason0x43/neovim-nightly
+jesseduffield/lazygit
+jmespath/jmespath
 ladicle/kubectl-bindrole
 mackerelio/mackerel-agent
 qmk/qmk
 robscott/tap
 romkatv/powerlevel10k
+terraform-docs/tap
 tkengo/highway
 versent/taps
 weaveworks/tap

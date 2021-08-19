@@ -114,3 +114,24 @@ function load_dev() {
     asdf reshim golang
   fi
 }
+
+function showlisterrule() {
+  local listenerarn=$1
+  if [[ "${listenerarn}" =~ ^arn.*$ ]]; then
+    aws elbv2 describe-rules --listener-arn $listenerarn --query 'Rules[*].{condition: Conditions[0].Values|[0]|@, priority: Priority}' | jq -rc '.[]|[.condition,.priority]|@tsv'| sort -k 2n |expand -t 30
+  else
+    echo "listenerarn is malformed"
+  fi
+}
+
+function continuelifecyclehook() {
+  local asgname=$1
+  aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $asgname | jq -r ".AutoScalingGroups[].Instances[].InstanceId" | xargs -I{} bash -c "aws autoscaling complete-lifecycle-action --lifecycle-hook-name nodedrainer --auto-scaling-group-name $asgname --lifecycle-action-result CONTINUE --instance-id {}"
+}
+
+function retireinstance() {
+  local instance=$1
+  lsec2 | grep $instance
+  echo aws autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id $instance
+}
+

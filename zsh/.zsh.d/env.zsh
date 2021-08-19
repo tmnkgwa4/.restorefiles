@@ -49,6 +49,7 @@
 
 : 'env vars for path' && {
   export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
+  export PATH=/Users/nakagawa-tomoaki/.asdf/installs/python/3.9.2/bin:${PATH}
   export PATH="$(go env GOPATH)/bin:${PATH}"
   export PATH=/usr/local/opt/gnu-getopt/bin:${PATH}
   export PATH=$PATH:~/.bin
@@ -57,4 +58,15 @@
 : 'env for asdf' && {
   source $(brew --prefix asdf)/asdf.sh
   legacy_version_file=yes
+  export GOPATH=$HOME/go
+  export GOROOT=$(go env GOROOT)
+  export PATH=$GOROOT/bin:$PATH
+  export GO111MODULE=on
+  export GOENV_ROOT=$HOME/.goenv
+  export PATH=$GOENV_ROOT/bin:$PATH
+  eval "$(goenv init -)"
+}
+
+: 'env for kubebuilder' && {
+  export PATH=$PATH:/usr/local/kubebuilder/bin
 }
