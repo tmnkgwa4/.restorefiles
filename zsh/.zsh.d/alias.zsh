@@ -18,6 +18,9 @@
   alias ...="cd ../.."
   alias ....="cd ../../.."
   alias .....="cd ../../../.."
+  alias sed='gsed'
+  alias grep='egrep'
+  alias d='docker'
 }
 
 : 'Alias for ls or exa' && {
@@ -55,9 +58,16 @@
 
 : 'Alias for git' && {
   if (($+commands[git])); then
-    alias ga='git add'
-    alias gc='git commit -m'
-    alias gp='git push'
+    alias g="git"
+    alias ga="git add"
+    alias gaa="git add -A"
+    alias gso="git switch master && git fetch origin && git reset --hard origin/master"
+    alias gsu="git switch master && git fetch upstream && git reset --hard upstream/master && git push -u origin master"
+    alias gson="git switch main && git fetch origin && git reset --hard origin/main"
+    alias gsun="git switch main && git fetch upstream && git reset --hard upstream/main && git push -u origin main"
+    alias gpo="git push -u origin"
+    alias gpu="git push -u upstream"
+    alias lg="lazygit"
   fi
 }
 
@@ -70,6 +80,6 @@
 }
 
 : 'Alias for vim' && {
-  alias vi='vim'
-  alias view='vim -R'
+  alias vi='nvim'
+  alias view='nvim -R'
 }

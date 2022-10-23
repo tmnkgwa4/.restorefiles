@@ -48,7 +48,7 @@ _kube_tmux_symbol() {
     KUBE_TMUX_SYMBOL="${KUBE_TMUX_SYMBOL_IMG}"
   fi
 
-  echo "${KUBE_TMUX_SYMBOL}"
+  echo "${KUBE_TMUX_SYMBOL}" | awk -F ":" '{print $6}' | cut -c 9-
 }
 
 _kube_tmux_split() {
@@ -115,7 +115,7 @@ _kube_tmux_get_context_ns() {
     fi
   fi
 
-  KUBE_TMUX_CONTEXT="$(${KUBE_TMUX_BINARY} config current-context 2>/dev/null)"
+  KUBE_TMUX_CONTEXT="$(${KUBE_TMUX_BINARY} config current-context | awk -F ":" '{print $6}' | cut -c 9- 2>/dev/null)"
   if [[ -z "${KUBE_TMUX_CONTEXT}" ]]; then
     KUBE_TMUX_CONTEXT="N/A"
     KUBE_TMUX_NAMESPACE="N/A"
@@ -134,18 +134,18 @@ kube_tmux() {
 
   # Symbol
   if [[ "${KUBE_TMUX_SYMBOL_ENABLE}" == true ]]; then
-    KUBE_TMUX+="#[fg=blue]$(_kube_tmux_symbol)#[fg=colour${1}]"
+    KUBE_TMUX+="$(_kube_tmux_symbol)"
   fi
 
   # Context
-  KUBE_TMUX+="#[fg=${2}]${KUBE_TMUX_CONTEXT}"
+  KUBE_TMUX+="${KUBE_TMUX_CONTEXT}"
 
   # Namespace
   if [[ "${KUBE_TMUX_NS_ENABLE}" == true ]]; then
     if [[ -n "${KUBE_TMUX_DIVIDER}" ]]; then
-      KUBE_TMUX+="#[fg=colour250]${KUBE_TMUX_DIVIDER}"
+      KUBE_TMUX+="${KUBE_TMUX_DIVIDER}"
     fi
-    KUBE_TMUX+="#[fg=${3}]${KUBE_TMUX_NAMESPACE}"
+    KUBE_TMUX+="${KUBE_TMUX_NAMESPACE}"
   fi
 
   echo "${KUBE_TMUX}"

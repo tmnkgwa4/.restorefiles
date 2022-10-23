@@ -2,6 +2,7 @@
   export DOTZSH_HOME=${HOME}/zsh
   export AWS_PROFILE=saml
   export AWS_DEFAULT_REGION=ap-northeast-1
+  export ONELOGIN_USERNAME=tomoaki-nakagawa@c-fo.com
 }
 
 : 'env vars for zplug' && {
@@ -37,7 +38,6 @@
 
 : 'env vars for man' && {
   export MANPATH=/usr/local/opt/inetutils/libexec/gnuman:${MANPATH}
-  source $HOME/.asdf/asdf.sh
 }
 
 : 'env compilation' && {
@@ -50,7 +50,33 @@
 
 : 'env vars for path' && {
   export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
-  export PATH="$(go env GOPATH)/bin:${PATH}"
   export PATH=/usr/local/opt/gnu-getopt/bin:${PATH}
+  export PATH=${PATH}:~/.bin
+  export PATH=$HOME/go/bin:/usr/local/go/bin:${PATH}
+  export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 }
 
+: 'env for python' && {
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+}
+
+: 'env for ruby' && {
+  export PATH="~/.rbenv/shims:/usr/local/bin:$PATH"
+  eval "$(rbenv init -)"
+}
+
+: 'env for node' && {
+  export PATH=$HOME/.nodebrew/current/bin:$PATH
+}
+
+: 'env for golang' && {
+  export GOROOT=/usr/local/go
+  export GOENV_LOCATION=$HOME/go/bin
+}
+
+: 'env for contaienr' && {
+  export DOCKER_HOST='tcp://127.0.0.1:2375'
+}

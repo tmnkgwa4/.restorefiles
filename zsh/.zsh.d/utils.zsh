@@ -108,9 +108,57 @@ function login_clusterops() {
 		clusterops bash
 }
 
-function load_dev() {
-  if is_osx; then
-    source $(brew --prefix asdf)/asdf.sh
-    D
+function showlisterrule() {
+  local listenerarn=$1
+  if [[ "${listenerarn}" =~ ^arn.*$ ]]; then
+    aws elbv2 describe-rules --listener-arn $listenerarn --query 'Rules[*].{condition: Conditions[0].Values|[0]|@, priority: Priority}' | jq -rc '.[]|[.condition,.priority]|@tsv'| sort -k 2n |expand -t 30
+  else
+    echo "listenerarn is malformed"
   fi
+}
+
+function continuelifecyclehook() {
+  local asgname=$1
+  aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $asgname | jq -r ".AutoScalingGroups[].Instances[].InstanceId" | xargs -I{} bash -c "aws autoscaling complete-lifecycle-action --lifecycle-hook-name nodedrainer --auto-scaling-group-name $asgname --lifecycle-action-result CONTINUE --instance-id {}"
+}
+
+function retireinstance() {
+  local instance=$1
+  lsec2 | grep $instance
+  echo aws autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id $instance
+}
+
+function approver() {
+  local pr=$1
+  gh pr review $pr --approve -b "lgtm"
+}
+
+function step() {
+    cluster_name=$(aws eks list-clusters | jq -r '.clusters[]' | sort | peco --prompt="select target cluster")
+
+    token=""
+    alllist=""
+
+    while true; do
+        json=$(aws ssm describe-instance-information --max-items 50 --filters "Key=tag:alpha.eksctl.io/cluster-name,Values=$cluster_name" --starting-token "$token")
+        token=$(echo $json | jq -r '.NextToken')
+
+        list=$(echo $json | jq -r '.InstanceInformationList[] | [.InstanceId, .IPAddress, .PingStatus, .LastPingDateTime, .ComputerName] | @csv' | sed 's/"//g')
+        alllist="${alllist}\n${list}"
+
+        if [ -z "$token" -o "$token" = "null" ]; then
+            break
+        fi
+    done
+
+    inst=$(echo $alllist | grep ssm-agent-r2 | column -t -s, | peco)
+    id=$(echo $inst | awk '{print $1}')
+
+    echo id: $i
+    ONELOGIN_USERNAME=tomoaki-nakagawa@c-fo.com ssh $id
+}
+
+function randomStr() {
+    local length=${1:-10}
+    cat /dev/urandom | base64 | fold -w $length | head -n 1
 }

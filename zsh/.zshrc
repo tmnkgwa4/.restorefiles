@@ -35,8 +35,15 @@
   source $HOME/.zsh.d/alias.zsh
 }
 
+: "Load keybind files." && {
+  source $HOME/.zsh.d/keybind.zsh
+}
+
 : "Output infomation of zsh startup time" && {
   if $ZSH_DEBUG; then
     zprof | head
   fi
 }
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+

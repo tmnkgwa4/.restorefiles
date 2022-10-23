@@ -55,7 +55,7 @@
 
 : 'cleanup .dotfiles' && {
   rm -rf ~/.zshrc
-    \ ~/.zshenv 
+    \ ~/.zshenv
     \ ~/.tmux.conf
     \ ~/.zsh.d
     \ ~/.tmux
@@ -67,6 +67,7 @@
 : 'install zinit' && {
   mkdir ~/.zinit
   git clone https://github.com/zdharma/zinit.git ~/.zinit/bin
+  git clone https://github.com/syndbg/goenv.git ~/.goenv
 }
 
 : 'install nerd font' && {
@@ -107,4 +108,8 @@
     echo load $FILENAME ...
    ln -s $DOTPATH/tmux/.tmux/$FILENAME ~/.tmux/$FILENAME
   done
+}
+
+: 'install vim' && {
+  ln -s $DOTPATH/vim/.vimrc ~/.vimrc
 }
