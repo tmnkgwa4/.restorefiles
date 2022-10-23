@@ -19,6 +19,8 @@
   alias ....="cd ../../.."
   alias .....="cd ../../../.."
   alias sed='gsed'
+  alias grep='egrep'
+  alias d='docker'
 }
 
 : 'Alias for ls or exa' && {
@@ -61,6 +63,8 @@
     alias gaa="git add -A"
     alias gso="git switch master && git fetch origin && git reset --hard origin/master"
     alias gsu="git switch master && git fetch upstream && git reset --hard upstream/master && git push -u origin master"
+    alias gson="git switch main && git fetch origin && git reset --hard origin/main"
+    alias gsun="git switch main && git fetch upstream && git reset --hard upstream/main && git push -u origin main"
     alias gpo="git push -u origin"
     alias gpu="git push -u upstream"
     alias lg="lazygit"

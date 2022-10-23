@@ -9,7 +9,6 @@
 
 : "Load myfunction files." && {
   source $HOME/.zsh.d/utils.zsh
-  load_dev
 }
 
 : "Load zinit files" && {
@@ -45,3 +44,6 @@
     zprof | head
   fi
 }
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
