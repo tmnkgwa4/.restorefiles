@@ -1,17 +1,14 @@
 NAME	 := DotfileInstaller
-VERSION  := 1.0.0
+VERSION  := 0.1.0
 
 .PHONY: install update depoy
 
 install:
-	cat installfiles/tap | xargs -I% -n1 brew tap %
-	cat installfiles/brew | xargs -I% brew install % || true
-	cat installfiles/cask | xargs -I% brew install --cask %
+	cat brew/tap | xargs -I{} -n1 brew tap {}
+	cat brew/brew | xargs -I{} -n1 brew install {} || true
+	cat brew/cask | xargs -I{} -n1 brew install --cask {}
 
 update:
-	brew tap > installfiles/tap
-	brew leaves > installfiles/brew
-	brew list --cask > installfiles/cask
-
-deploy:
-	/bin/zsh ./setup.zsh
+	brew tap > brew/tap
+	brew leaves > brew/brew
+	brew list --cask > brew/cask
