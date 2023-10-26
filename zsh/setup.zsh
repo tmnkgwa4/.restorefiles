@@ -5,11 +5,16 @@
   if [ -d $HOME/.zsh.d ]; then
     rm -rf $HOME/.zsh.d
   fi
-  mkdir $HOME/.zsh.d
+  mkdir -p $HOME/.zsh.d/sync $HOME/.zsh.d/defer
+
+  if [ -d $HOME/.config/sheldon ]; then
+    rm -rf $HOME/.config/sheldon
+  fi
+  mkdir $HOME/.config/sheldon
 }
 
 : 'install .zshrc files' && {
-  ZSHFILES=(".zshrc" ".zshenv")
+  ZSHFILES=(".zshrc")
   for FILENAME in $ZSHFILES;
   do
     echo install $FILENAME
@@ -25,11 +30,28 @@
 }
 
 : 'install .zsh.d files' && {
-  for FILE in $(find $DOTFILEPATH/zsh/.zsh.d -type f);
+  for FILE in $(find $DOTFILEPATH/zsh/sync -type f);
   do
     FILENAME=$(basename $FILE)
     echo load $FILENAME ...
-    ln -s $DOTFILEPATH/zsh/.zsh.d/$FILENAME $HOME/.zsh.d/$FILENAME
+    ln -s $DOTFILEPATH/zsh/sync/$FILENAME $HOME/.zsh.d/sync/$FILENAME
+    echo install $FILENAME done.
+  done
+  for FILE in $(find $DOTFILEPATH/zsh/defer -type f);
+  do
+    FILENAME=$(basename $FILE)
+    echo load $FILENAME ...
+    ln -s $DOTFILEPATH/zsh/defer/$FILENAME $HOME/.zsh.d/defer/$FILENAME
+    echo install $FILENAME done.
+  done
+}
+
+: 'install sheldond files' && {
+  for FILE in $(find $DOTFILEPATH/zsh/sheldon -type f);
+  do
+    FILENAME=$(basename $FILE)
+    echo load $FILENAME ...
+    ln -s $DOTFILEPATH/zsh/sheldon/$FILENAME $HOME/.config/sheldon/$FILENAME
     echo install $FILENAME done.
   done
 }

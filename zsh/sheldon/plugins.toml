@@ -1,0 +1,89 @@
+shell = "zsh"
+
+## lazy load
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+apply = ["source"]
+
+[templates]
+defer = '{% for file in files %}zsh-defer source "{{ file }}"{% endfor %}'
+
+[plugins.compinit]
+inline = 'autoload -Uz compinit && zsh-defer compinit'
+
+[plugins.load-prompt]
+local = "~/.zsh.d/sync"
+use = ["prompt.zsh"]
+apply = ["source"]
+
+## completion
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+apply = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+apply = ["defer"]
+
+[plugins.zsh-curl-completion]
+github = 'Valodim/zsh-curl-completion'
+apply = ["defer"]
+
+[plugins.hub-zsh-completion]
+github = 'glidenote/hub-zsh-completion'
+apply = ["defer"]
+
+[plugins.zsh-better-npm-completion]
+github = "lukechilds/zsh-better-npm-completion"
+apply = ["defer"]
+
+[plugins.aws_zsh_completer]
+remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"
+apply = ["defer"]
+
+
+# Find and display frequently used displays
+[plugins.z]
+github = 'rupa/z'
+apply = ["defer"]
+
+
+# coloring
+[plugins.zsh-256color]
+github = 'chrissicool/zsh-256color'
+apply = ["source"]
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+apply = ["source"]
+
+[plugins.colors]
+inline = 'autoload -Uz colors && zsh-defer colors'
+
+
+## emoji
+[plugins.emoji-cli]
+github = 'b4b4r07/emoji-cli'
+
+
+## version management
+[plugins.asdf]
+github = "asdf-vm/asdf"
+apply = ["defer"]
+
+
+## load dotfiles
+[plugins.sync-load-functions]
+local = "~/.zsh.d/sync"
+use = ["functions.zsh"]
+apply = ["source"]
+
+[plugins.sync-load-dotfiles]
+local = "~/.zsh.d/sync"
+use = ["{!functinos,!prompt,*}.zsh"]
+apply = ["source"]
+
+[plugins.lazy-load-dotfiles]
+local = "~/.zsh.d/defer"
+use = ["{*,!prompt}.zsh"]
+apply = ["defer"]
