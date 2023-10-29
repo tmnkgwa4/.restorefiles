@@ -11,11 +11,6 @@ defer = '{% for file in files %}zsh-defer source "{{ file }}"{% endfor %}'
 [plugins.compinit]
 inline = 'autoload -Uz compinit && zsh-defer compinit'
 
-[plugins.load-prompt]
-local = "~/.zsh.d/sync"
-use = ["prompt.zsh"]
-apply = ["source"]
-
 ## completion
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
@@ -72,6 +67,11 @@ github = "asdf-vm/asdf"
 apply = ["defer"]
 
 
+## load prompt
+[plugins.load-prompt]
+inline = 'source $HOME/.zsh.d/sync/preload-prompt.zsh'
+
+
 ## load dotfiles
 [plugins.sync-load-functions]
 local = "~/.zsh.d/sync"
@@ -80,10 +80,10 @@ apply = ["source"]
 
 [plugins.sync-load-dotfiles]
 local = "~/.zsh.d/sync"
-use = ["{!functinos,!prompt,*}.zsh"]
+use = ["{preload-*}.zsh"]
 apply = ["source"]
 
-[plugins.lazy-load-dotfiles]
+[plugins.post-load-dotfiles]
 local = "~/.zsh.d/defer"
-use = ["{*,!prompt}.zsh"]
+use = ["{postload-*}.zsh"]
 apply = ["defer"]

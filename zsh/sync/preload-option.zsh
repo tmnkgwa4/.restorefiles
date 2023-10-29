@@ -99,3 +99,19 @@
     complete -C '/usr/local/bin/aws_completer' aws
   fi
 }
+
+: 'zsh global keybind' && {
+  # EDITOR変数がvim系だとtmuxがvi-mode用にbindkeyが上書きされるので
+  # 行頭と行末の移動だけEmacs風のCtrl+A/Eでできるように戻す
+  bindkey "^A" beginning-of-line
+  bindkey "^E" end-of-line
+  bindkey "^F" forward-char
+  bindkey "^D" forward-word
+  bindkey "^J" backward-char
+  bindkey "^K" backward-word
+}
+
+: 'zsh history by peco' && {
+  zle -N peco-history-selection
+  bindkey '^R' peco-history-selection
+}
