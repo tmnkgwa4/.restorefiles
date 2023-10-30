@@ -9,11 +9,11 @@
 }
 
 : 'install tmux.conf files' && {
-  ZSHFILES=(".tmux.conf")
-  for FILENAME in $ZSHFILES;
+  TMUXFILES=(".tmux.conf")
+  for FILENAME in $TMUXFILES;
   do
     echo install $FILENAME
-    if [ -f $HOME/$FILENAME ]; then
+    if [ -e $HOME/$FILENAME ]; then
       echo $FILENAME is existed. delete this. ...
       rm -f $HOME/$FILENAME
       echo done.
@@ -32,4 +32,8 @@
     ln -s $DOTFILEPATH/tmux/.tmux.d/$FILENAME $HOME/.tmux.d/$FILENAME
     echo install $FILENAME done.
   done
+}
+
+: 'unset env' &&{
+  unset FILENAME TMUXFILES
 }
