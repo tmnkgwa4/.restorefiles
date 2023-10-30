@@ -17,3 +17,8 @@ brew.update:
 # zsh
 zsh.install:
 	/bin/zsh zsh/setup.zsh
+
+#--------------------
+# tmux
+tmux.install:
+	/bin/zsh tmux/setup.zsh
