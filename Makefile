@@ -13,12 +13,17 @@ brew.update:
 	brew leaves > brew/brew
 	brew list --cask > brew/cask
 
-#--------------------
+# --------------------
+# all
+all.install: zsh.install tmux.install
+	echo "All dotfile install."
+
+# --------------------
 # zsh
 zsh.install:
 	/bin/zsh zsh/setup.zsh
 
-#--------------------
+# --------------------
 # tmux
 tmux.install:
 	/bin/zsh tmux/setup.zsh
