@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh -e
 
 : 'setup environment' && {
   export DOTFILEPATH=$(pwd)
@@ -18,7 +18,7 @@
   for FILENAME in $ZSHFILES;
   do
     echo install $FILENAME
-    if [ -f $HOME/$FILENAME ]; then
+    if [ -e $HOME/$FILENAME ]; then
       echo $FILENAME is existed. delete this. ...
       rm -f $HOME/$FILENAME
       echo done.
@@ -54,4 +54,8 @@
     ln -s $DOTFILEPATH/zsh/sheldon/$FILENAME $HOME/.config/sheldon/$FILENAME
     echo install $FILENAME done.
   done
+}
+
+: 'unset env' &&{
+  unset FILENAME ZSHFILES
 }
