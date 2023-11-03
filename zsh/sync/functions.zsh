@@ -53,7 +53,7 @@ function is_linux() {
   fi
 }
 
-function peco-select-history() {
+function peco-history-selection() {
   BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
   CURSOR=$#BUFFER
   zle clear-screen
