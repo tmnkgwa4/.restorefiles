@@ -15,7 +15,7 @@ brew.update:
 
 # --------------------
 # all
-all.install: zsh.install tmux.install
+all.install: zsh.install tmux.install nvim.install
 	echo "All dotfile install."
 
 # --------------------
@@ -27,3 +27,8 @@ zsh.install:
 # tmux
 tmux.install:
 	/bin/zsh tmux/setup.zsh
+
+# --------------------
+# neovim
+nvim.install:
+	/bin/zsh nvim/setup.zsh
