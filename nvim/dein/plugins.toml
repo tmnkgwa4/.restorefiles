@@ -19,22 +19,22 @@ colorscheme tokyonight
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
-        \ 'colorscheme': 'tokyonight',
-        \ 'mode_map': {'c': 'NORMAL'},
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-        \ },
-        \ 'component_function': {
-        \   'modified': 'LightlineModified',
-        \   'readonly': 'LightlineReadonly',
-        \   'fugitive': 'LightlineFugitive',
-        \   'filename': 'LightlineFilename',
-        \   'fileformat': 'LightlineFileformat',
-        \   'filetype': 'LightlineFiletype',
-        \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode'
-        \ }
-        \ }
+  \ 'colorscheme': 'tokyonight',
+  \ 'mode_map': {'c': 'NORMAL'},
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+  \ },
+  \ 'component_function': {
+  \   'modified': 'LightlineModified',
+  \   'readonly': 'LightlineReadonly',
+  \   'fugitive': 'LightlineFugitive',
+  \   'filename': 'LightlineFilename',
+  \   'fileformat': 'LightlineFileformat',
+  \   'filetype': 'LightlineFiletype',
+  \   'fileencoding': 'LightlineFileencoding',
+  \   'mode': 'LightlineMode'
+  \ }
+  \ }
 
 function! LightlineModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -46,11 +46,11 @@ endfunction
 
 function! LightlineFilename()
   return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+  \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+  \  &ft == 'unite' ? unite#get_status_string() :
+  \  &ft == 'vimshell' ? vimshell#get_status_string() :
+  \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+  \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
 function! LightlineFugitive()
@@ -132,11 +132,12 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     disable = {
       'lua',
-      'ruby',
-      'toml',
       'c_sharp',
       'vue',
     }
+  },
+  indent = {
+    enable = true,
   },
   ensure_installed = 'all'
 }
@@ -150,4 +151,21 @@ hook_add = '''
 map <C-n> :NERDTreeToggle<CR>
 " Show hidden files
 let NERDTreeShowHidden = 1
+'''
+
+[[plugins]]
+repo = 'kdheepak/lazygit.nvim'
+hook_add = '''
+" Ctrl-g: Open lazygit
+map <C-g> :LazyGit
+'''
+
+[[plugins]] # Visualizing indentation in vim
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+colorscheme tokyonight
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
 '''
