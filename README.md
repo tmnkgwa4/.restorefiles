@@ -2,35 +2,46 @@
 My beloved dotfiles. 😍😍😍
 
 ## tree
-```
-❯ tree -a -I ".git|.gitignore|test" .
+```sh
+╰─ tree -a -I ".git|.gitignore|test" .
 .
-├── .github
-│   ├── PULL_REQUEST_TEMPLATE.md
-│   └── workflows
-│       └── ci.yml
 ├── Makefile
 ├── README.md
-├── setup.zsh
+├── brew
+│   ├── brew
+│   ├── cask
+│   └── tap
+├── nvim
+│   ├── dein
+│   │   ├── lazy.toml
+│   │   ├── lsp.toml
+│   │   ├── neovim.toml
+│   │   └── plugins.toml
+│   ├── init.vim
+│   └── setup.zsh
+├── src
+│   └── tree_sitter
 ├── tmux
-│   ├── .tmux
-│   │   ├── awsaccount.tmux
-│   │   └── kube.tmux
-│   └── .tmux.conf
+│   ├── .tmux.conf
+│   ├── .tmux.d
+│   │   ├── awsaccount.tmux
+│   │   ├── kube.tmux
+│   │   └── samlexpiretimer.tmux
+│   └── setup.zsh
 └── zsh
-    ├── .zsh.d
-    │   ├── alias.zsh
-    │   ├── completion.zsh
-    │   ├── env.zsh
-    │   ├── mykeybind.zsh
-    │   ├── option.zsh
-    │   ├── prompt.zsh
-    │   ├── utils.zsh
-    │   └── zplugin.zsh
-    ├── .zshenv
-    └── .zshrc
+    ├── .zshrc
+    ├── defer
+    │   └── postload-env.zsh
+    ├── setup.zsh
+    ├── sheldon
+    │   └── plugins.toml
+    └── sync
+        ├── functions.zsh
+        ├── p10k-config.zsh
+        ├── preload-alias.zsh
+        ├── preload-env.zsh
+        ├── preload-option.zsh
+        └── preload-prompt.zsh
 
-6 directories, 18 files
+12 directories, 26 files
 ```
-
-### test
