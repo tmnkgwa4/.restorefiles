@@ -1,10 +1,7 @@
-let g:deoplete#enable_at_startup = 1
-
-"set up XDG environment
 let g:cache_home = empty($XDG_CACHE_HOME) ? expand('$HOME/.cache') : $XDG_CACHE_HOME
 let g:config_home = empty($XDG_CONFIG_HOME) ? expand('$HOME/.config') : $XDG_CONFIG_HOME
 
-" dein {{{
+" dein configuration {{{
 let s:dein_cache_dir = g:cache_home . '/dein'
 
 " reset augroup
@@ -12,7 +9,7 @@ augroup MyAutoCmd
   autocmd!
 augroup END
 
-if &runtimepath !~# '/nvim/dein.vim'
+if &runtimepath !~# '/dein.vim'
   let s:dein_repo_dir = s:dein_cache_dir . '/repos/github.com/Shougo/dein.vim'
 
   " Auto Download
@@ -31,6 +28,7 @@ let g:dein#install_message_type = 'none'
 let g:dein#enable_notification = 1
 hi MatchParen term=standout ctermbg=White ctermfg=White guibg=White guifg=White
 
+" load plugins file
 if dein#load_state(s:dein_cache_dir)
   call dein#begin(s:dein_cache_dir)
 
@@ -57,7 +55,6 @@ if has('vim_starting') && dein#check_install()
 endif
 " }}}
 
-
 " 行数
 set number relativenumber
 
@@ -72,7 +69,6 @@ inoremap <A-h> <left>
 inoremap <A-j> <down>
 inoremap <A-k> <up>
 inoremap <A-l> <right>
-
 
 filetype indent on
 set incsearch
@@ -116,32 +112,3 @@ au FileType qf call AdjustWindowHeight(3, 10)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
-
-"set up the dein.vim directory
-let s:dein_dir = expand('$XDG_CACHE_HOME/nvim/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-let g:rc_dir = expand('$XDG_CONFIG_HOME/nvim')
-
-if !isdirectory(s:dein_repo_dir)
-  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-endif
-execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-
-  " load the file which contain the plugin list
-  let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-
-  call dein#load_toml(s:toml, {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-  call dein#end()
-  call dein#save_state()
-endif
-
-" automatically install any plug-ins that need to be installed.
-if dein#check_install()
-  call dein#install()
-endif
