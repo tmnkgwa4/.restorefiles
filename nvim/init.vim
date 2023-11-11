@@ -64,11 +64,11 @@ set noswapfile
 inoremap <silent> jj <ESC>
 inoremap <silent> kk <ESC>
 
-" insert モードで Alt + hjkl でカーソル移動
-inoremap <A-h> <left>
-inoremap <A-j> <down>
-inoremap <A-k> <up>
-inoremap <A-l> <right>
+" insert モードで Citl + hjkl でカーソル移動
+inoremap <C-h> <left>
+inoremap <C-j> <down>
+inoremap <C-k> <up>
+inoremap <C-l> <right>
 
 filetype indent on
 set incsearch
