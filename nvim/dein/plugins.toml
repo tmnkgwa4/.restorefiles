@@ -1,0 +1,171 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # color scheme
+repo = 'ghifarit53/tokyonight-vim'
+hook_add = '''
+set termguicolors
+
+let g:tokyonight_style = 'storm'
+let g:tokyonight_enable_italic = 1
+
+colorscheme tokyonight
+'''
+
+[[plugins]] # status line
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+let g:lightline = {
+  \ 'colorscheme': 'tokyonight',
+  \ 'mode_map': {'c': 'NORMAL'},
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+  \ },
+  \ 'component_function': {
+  \   'modified': 'LightlineModified',
+  \   'readonly': 'LightlineReadonly',
+  \   'fugitive': 'LightlineFugitive',
+  \   'filename': 'LightlineFilename',
+  \   'fileformat': 'LightlineFileformat',
+  \   'filetype': 'LightlineFiletype',
+  \   'fileencoding': 'LightlineFileencoding',
+  \   'mode': 'LightlineMode'
+  \ }
+  \ }
+
+function! LightlineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+  \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+  \  &ft == 'unite' ? unite#get_status_string() :
+  \  &ft == 'vimshell' ? vimshell#get_status_string() :
+  \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+  \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+    return fugitive#head()
+  else
+    return ''
+  endif
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+'''
+
+[[plugins]] # Set the buffer filetype based on the code block the cursor currently resides in.
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+hook_add = '''
+let g:precious_enable_switchers = {
+  \	"vue" : {
+  \		"setfiletype" : 0
+  \	},
+  \}
+'''
+
+[[plugins]] # for asynchronous processing in vim
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]] # for asynchronous processing in vim
+repo = 'thinca/vim-quickrun'
+depends_on = 'vimproc.vim'
+hook_add = '''
+nmap <Leader>q :QuickRun<CR>
+let g:quickrun_config = get(g:, 'quickrun_config', {})
+let g:quickrun_config._ = {
+  \ 'runner'  : 'vimproc',
+  \ 'runner/vimproc/updatetime' : 60,
+  \ 'outputter/buffer/split'  : ':rightbelow 18sp',
+  \ 'outputter/buffer/close_on_empty' : 1,
+  \ 'hook/time/enable': 1
+  \ }
+
+" for bundler
+let g:quickrun_config['minitest/bundle'] = {
+  \ 'type': 'rspec/bundle',
+  \ 'command': 'ruby',
+  \ 'exec': 'bundle exec %c %s'
+  \}
+
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+au FileType qf nnoremap <silent><buffer>q :quit<CR>
+
+function! RSpecQuickrun()
+  let b:quickrun_config = {'type' : 'minitest/bundle'}
+endfunction
+autocmd BufReadPost *_test.rb call RSpecQuickrun()
+'''
+
+[[plugins]] 
+repo = 'nvim-treesitter/nvim-treesitter'
+hook_add = '''
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {
+      'lua',
+      'c_sharp',
+      'vue',
+    }
+  },
+  indent = {
+    enable = true,
+  },
+  ensure_installed = 'all'
+}
+EOF
+'''
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+hook_add = '''
+" Ctrl-n: Open NERDTree
+map <C-n> :NERDTreeToggle<CR>
+" Show hidden files
+let NERDTreeShowHidden = 1
+'''
+
+[[plugins]]
+repo = 'kdheepak/lazygit.nvim'
+hook_add = '''
+" Ctrl-g: Open lazygit
+map <C-g> :LazyGit
+'''
+
+[[plugins]] # Visualizing indentation in vim
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+colorscheme tokyonight
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+'''
