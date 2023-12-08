@@ -1,10 +1,12 @@
 #!/bin/zsh -e
 
+export PATH=/opt/homebrew/bin:$PATH
+
 # ----------
 # p10k config
 autoload -Uz compinit
 compinit
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+export POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # ----------
 # create cache directory

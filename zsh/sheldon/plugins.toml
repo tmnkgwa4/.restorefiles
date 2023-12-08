@@ -1,5 +1,8 @@
 shell = "zsh"
 
+[plugins.powerlevel10k]
+github = "romkatv/powerlevel10k"
+
 ## lazy load
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
