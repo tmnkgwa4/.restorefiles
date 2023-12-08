@@ -1,8 +1,9 @@
 #!/bin/zsh -e
 
 : 'setup environment' && {
+  XDG_CONFIG_HOME=$HOME/.config
   DOTFILEPATH=$(pwd)
-  if [ -d ${XDG_CONFIG_HOME:-$HOME/.config}/nvim ]; then
+  if [ -d $XDG_CONFIG_HOME/nvim ]; then
     rm -rf $XDG_CONFIG_HOME/nvim
   fi
   mkdir -p $XDG_CONFIG_HOME/nvim/dein $XDG_CONFIG_HOME/nvim/settings
