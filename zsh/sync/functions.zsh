@@ -98,3 +98,14 @@ function ts () {
   tmux resize-pane -D 15
   tmux select-pane -t 1
 }
+
+function continuelifecyclehook() {
+  local asgname=$1
+  aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names $asgname | jq -r ".AutoScalingGroups[].Instances[].InstanceId" | xargs -I{} bash -c "aws autoscaling complete-lifecycle-action --lifecycle-hook-name nodedrainer --auto-scaling-group-name $asgname --lifecycle-action-result CONTINUE --instance-id {}"
+}
+
+function retireinstance() {
+  local instance=$1
+  lsec2 | grep $instance
+  echo aws autoscaling terminate-instance-in-auto-scaling-group --no-should-decrement-desired-capacity --instance-id $instance
+}
