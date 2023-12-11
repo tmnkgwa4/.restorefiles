@@ -50,6 +50,17 @@
   export PATH=$PATH:~/.bin
 }
 
+: 'env vars for php' && {
+  export PATH="/opt/homebrew/opt/libiconv/bin:$PATH"
+  export LDFLAGS="-L/opt/homebrew/opt/libiconv/lib"
+  export CPPFLAGS="-I/opt/homebrew/opt/libiconv/include"
+}
+
+: 'env vars for go' && {
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
+}
+
 : 'env for asdf' && {
   source $(brew --prefix asdf)/libexec/asdf.sh
   legacy_version_file=yes

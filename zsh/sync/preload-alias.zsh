@@ -54,6 +54,7 @@
 
 : 'Alias for aws' && {
   alias lsec2='lsec2 --region=ap-northeast-1'
+  alias sta="saml2aws login --skip-prompt --force"
 }
 
 : 'Alias for git' && {
