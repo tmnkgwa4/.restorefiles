@@ -169,3 +169,35 @@ let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 '''
+
+# deoplete
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+   let g:deoplete#enable_at_startup = 1
+   let g:deoplete#enable_ignore_case = 1
+   let deoplete#costom#option = { 'smart_case': 1 }
+'''
+
+# deoplete on vim requires plugin 1/2
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+# deoplete on vim requires plugin 2/2
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+# copilot on vim
+[[plugins]]
+repo = 'github/copilot.vim'
+hook_add='''
+imap <silent> <C-j> <Plug>(copilot-next)
+imap <silent> <C-k> <Plug>(copilot-previous)
+imap <silent> <C-o> <Plug>(copilot-suggest)
+
+let g:copilot_filetypes = {
+    \ 'markdown': v:true,
+    \ 'text': v:true,
+    \ 'yaml': v:true
+    \ }
+'''
