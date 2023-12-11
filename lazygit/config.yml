@@ -1,0 +1,82 @@
+---
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+gui:
+  sidePanelWidth: 0.15
+  theme:
+    selectedLineBgColor:
+      - underline
+    selectedRangeBgColor:
+      - underline
+refresher:
+  refreshInterval: 3
+os:
+  editCommand: "nvim"
+customCommands:
+  - key: "<c-r>"
+    command: "gh pr create --draft --title {{.CheckedOutBranch.Name}}"
+    context: "global"
+    loadingText: "Creating pull request on GitHub"
+    subprocess: true
+  - key: "<c-l>"
+    command: "gh pr review --approve -b 'lgtm!! :beers:' {{index .PromptResponses 0}}"
+    context: "global"
+    loadingText: "Approving pull request on GitHub"
+    prompts:
+      - type: 'input'
+        title: 'pr number'
+        initialValue: ''
+    subprocess: true
+  - key: "<c-d>"
+    command: "git fetch upstream pull/{{index .PromptResponses 0}}/head:{{index .PromptResponses 1}} "
+    context: "global"
+    loadingText: "Fetching pull request on GitHub"
+    prompts:
+      - type: 'input'
+        title: 'pr number'
+        initialValue: ''
+      - type: 'input'
+        title: 'branch name'
+        initialValue: ''
+    subprocess: false
+  - key: "<c-p>"
+    command: "git push -f upstream {{index .PromptResponses 0}}"
+    context: "global"
+    loadingText: "Pushing force to origin"
+    prompts:
+      - type: 'input'
+        title: 'branch name'
+        initialValue: ''
+    subprocess: false
+  - key: c
+    command: git cz
+    context: files
+    description: change commits
+    subprocess: true
+  - key: b
+    command: tig blame -- {{.SelectedFile.Name}}
+    context: files
+    description: blame file at tree
+    subprocess: true
+  - key: b
+    command: tig blame {{.SelectedSubCommit.Sha}} -- {{.SelectedCommitFile.Name}}
+    context: commitFiles
+    description: blame file at revision
+    subprocess: true
+  - key: B
+    command: tig blame -- {{.SelectedCommitFile.Name}}
+    context: commitFiles
+    description: blame file at tree
+    subprocess: true
+  - key: t
+    command: tig {{.SelectedSubCommit.Sha}} -- {{.SelectedCommitFile.Name}}
+    context: commitFiles
+    description: tig file (history of commits affecting file)
+    subprocess: true
+  - key: t
+    command: tig -- {{.SelectedFile.Name}}
+    context: files
+    description: tig file (history of commits affecting file)
+    subprocess: true
