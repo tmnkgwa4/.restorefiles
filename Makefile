@@ -32,3 +32,8 @@ tmux.install:
 # neovim
 nvim.install:
 	/bin/zsh nvim/setup.zsh
+
+# --------------------
+# lazygit
+lazygit.install:
+	/bin/zsh lazygit/setup.zsh
